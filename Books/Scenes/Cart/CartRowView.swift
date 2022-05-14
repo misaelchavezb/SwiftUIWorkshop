@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CartRowView: View {
     let book: Book
+    let count: Int
 
     var body: some View {
         HStack {
@@ -23,14 +24,14 @@ struct CartRowView: View {
 
             }
             Spacer()
-            TagView(text: "x1")
+            TagView(text: "x\(count)")
         }
     }
 }
 
 struct CartRowView_Previews: PreviewProvider {
     static var previews: some View {
-        CartRowView(book: Book.mockedData[0])
+        CartRowView(book: Book.mockedData[0], count: 1)
             .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/400.0/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/))
     }
 }

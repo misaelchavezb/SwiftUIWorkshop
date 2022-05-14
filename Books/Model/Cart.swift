@@ -8,23 +8,31 @@
 import Foundation
 
 struct Cart {
-    var items: [Book] = []
+    var items: [Book: Int] = [:]
 
     var totalItems: Int {
         items.count
     }
 
     var totalPrice: Double {
-        items.reduce(0) { partialResult, book in
-            partialResult + book.price
-        }
+        return items.map { book, items in
+            book.price * Double(items)
+        }.reduce(0, +)
     }
 
     mutating func addBook(_ book: Book) {
-        items.append(book)
+        if items.contains(where: { $0.key == book }) {
+            items[book]! += 1
+        } else {
+            items[book] = 1
+        }
     }
 
     mutating func removeBook(_ book: Book) {
-        items.removeAll { $0 == book }
+        if items.contains(where: { $0.key == book }) {
+            if let newValue = items[book] {
+                items[book] = newValue - 1
+            }
+        }
     }
 }

@@ -25,6 +25,13 @@ extension Book: Equatable {
 
 extension Book: Identifiable { }
 
+extension Book: Hashable { }
+
+extension Book: Comparable {
+    static func < (lhs: Book, rhs: Book) -> Bool {
+        lhs.title < rhs.title
+    }
+}
 extension Book {
     static let mockedData: [Book] = [
         Book(title: "Fotollavero Mexicano",
